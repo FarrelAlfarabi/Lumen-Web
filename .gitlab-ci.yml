@@ -21,19 +21,24 @@ deploy:
   before_script:
     - apk add --no-cache lftp
   script:
-    - lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" -e "
-        set ftp:ssl-allow no;
-        set ftp:passive-mode true;
-        echo '--- PWD before ---';
-        pwd;
-        echo '--- LS before ---';
-        cls -l $FTP_PATH;
-        # upload build/ contents INTO public_html (not as a subfolder)
-        mirror -R --delete ${APP_DIR:-.}/build $FTP_PATH;
-        echo '--- LS after ---';
-        cls -l $FTP_PATH;
-        bye
-      "
+    - |
+      lftp -u "$FTP_USER","$FTP_PASS" "$FTP_HOST" <<EOF
+      set ftp:ssl-allow no
+      set ftp:passive-mode true
+      echo '--- pwd ---'
+      pwd
+      echo '--- cd to $FTP_PATH ---'
+      cd $FTP_PATH
+      echo '--- ls before ---'
+      cls -l
+      # upload *contents* of build/ into public_html
+      mirror -R --delete ${APP_DIR:-.}/build .
+      echo '--- ls after ---'
+      cls -l
+      bye
+      EOF
   only:
     - main
+
+
 
