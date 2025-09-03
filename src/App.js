@@ -56,15 +56,15 @@ function App() {
               </button>
             </div>
             <div className="social-links">
-              <a href="#" className="social-link">
+              <a href="https://www.linkedin.com/company/lumenify" className="social-link">
                 <Linkedin size={24} />
               </a>
-              <a href="#" className="social-link">
+              {/* <a href="#" className="social-link">
                 <Github size={24} />
-              </a>
-              <a href="#" className="social-link">
+              </a> */}
+              {/* <a href="#" className="social-link">
                 <Globe size={24} />
-              </a>
+              </a> */}
             </div>
           </div>
           <div className="hero-image">
