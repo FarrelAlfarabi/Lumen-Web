@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Globe, Download, Mail, Monitor, Palette, Code } from 'lucide-react';
+import {Linkedin, Download, Mail, Monitor, Palette, Code } from 'lucide-react';
 import './App.css';
 
 function App() {
