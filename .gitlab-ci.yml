@@ -1,0 +1,30 @@
+image: node:18
+
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script:
+    - npm ci
+    - npm run build
+  artifacts:
+    paths:
+      - build
+
+deploy:
+  stage: deploy
+  image: alpine:latest
+  needs: ["build"]
+  before_script:
+    - apk add --no-cache lftp
+  script:
+    - lftp -e "
+        set ftp:ssl-allow no;
+        open -u $FTP_USER,$FTP_PASS $FTP_HOST;
+        mirror -R build $FTP_PATH;
+        bye
+      "
+  only:
+    - main
