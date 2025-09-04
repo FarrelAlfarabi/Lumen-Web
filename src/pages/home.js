@@ -1,6 +1,6 @@
 // src/pages/Home.jsx
 import React from 'react';
-import { Linkedin, Download, Mail, Monitor, Palette, Code } from 'lucide-react';
+import { Linkedin, Download, Monitor, Palette, Code } from 'lucide-react';
 import '../App.css';
 
 export default function Home() {
