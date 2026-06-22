@@ -22,12 +22,17 @@ const Contact = () => {
     setStatus('');
 
     try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('message', formData.message);
+
       const response = await fetch('https://formspree.io/f/mgojevko', {
         method: 'POST',
+        body: formDataToSend,
         headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(formData)
+          'Accept': 'application/json'
+        }
       });
 
       if (response.ok) {
