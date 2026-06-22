@@ -2,6 +2,7 @@
 import React from 'react';
 import '../App.css';
 import { LUMENIFY_DATA } from '../data/lumenifyData';
+import Contact from '../components/Contact';
 
 export default function Team() {
   const handleImageError = (e) => {
@@ -85,20 +86,7 @@ export default function Team() {
               Interested in collaborating? Let’s discuss how we can drive your growth.
             </p>
           </div>
-          <div className="contact-button-container">
-            <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => {
-                window.open(
-                    "https://mail.google.com/mail/?view=cm&fs=1&to=lumenify.id@gmail.com&su=Project%20Inquiry&body=Hi%20Lumenify%2C%0A%0AI%20would%20like%20to%20discuss%20a%20new%20project...",
-                    "_blank"
-                );
-                }}
-            >
-                <span>Get In Touch</span>
-            </button>
-            </div>
+          <Contact />
 
         </div>
       </section>
