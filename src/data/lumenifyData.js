@@ -78,17 +78,17 @@ export const LUMENIFY_DATA = {
     {
       name: "Khalid Abdul Hakim, S.Ant., M.M.",
       role: "Co-Founder & CEO",
-      image: "/KhalidPasFotoEdited.png"
+      image: "/khalid.png"
     },
     {
       name: "Farrel Alfarabi Saleh, S.Kom., M.M.",
       role: "Co-Founder & CTO",
-      image: "/Farrel Alfarabi Saleh.png"
+      image: "/farrel.png"
     },
     {
       name: "Putri Suli Puspasari, S.Ak., M.M.",
       role: "Co-Founder & CMO",
-      image: "/SuliPasfoto.png"
+      image: "/suli.png"
     }
   ]
 };
