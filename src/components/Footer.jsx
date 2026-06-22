@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { LUMENIFY_DATA } from '../data/lumenifyData';
-import { MapPin, Mail, Instagram, ArrowUpRight } from 'lucide-react';
+import { MapPin, Mail, Instagram, Globe, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
-  const { name, email, instagram, office } = LUMENIFY_DATA.company;
+  const { name, email, instagram, website, office } = LUMENIFY_DATA.company;
   const [formData, setFormData] = useState({
     name: '',
     business: '',
@@ -129,6 +129,7 @@ const Footer = () => {
             <span className="flex items-center gap-2"><MapPin className="w-4 h-4" /> {office}</span>
             <span className="flex items-center gap-2"><Mail className="w-4 h-4" /> {email}</span>
             <span className="flex items-center gap-2"><Instagram className="w-4 h-4" /> {instagram}</span>
+            <span className="flex items-center gap-2"><Globe className="w-4 h-4" /> {website}</span>
           </div>
         </div>
       </div>

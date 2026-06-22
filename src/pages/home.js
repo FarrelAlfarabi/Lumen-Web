@@ -5,6 +5,7 @@ import About from '../components/About';
 import Services from '../components/Services';
 import Methodology from '../components/Methodology';
 import Team from '../components/Team';
+import SuccessStories from '../components/SuccessStories';
 import Footer from '../components/Footer';
 
 export default function Home() {
@@ -16,6 +17,7 @@ export default function Home() {
       <Services />
       <Methodology />
       <Team />
+      <SuccessStories />
       <Footer />
     </div>
   );
