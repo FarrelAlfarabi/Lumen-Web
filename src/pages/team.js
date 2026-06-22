@@ -1,12 +1,7 @@
 // src/pages/Team.jsx
 import React from 'react';
 import '../App.css';
-
-const TEAM = [
-  { name: 'Khalid', role: 'Co-Founder', img: '/images/team1.jpg' },
-  { name: 'Farrel', role: 'Co-Founder', img: '/images/team2.jpg' },
-  { name: 'Suli', role: 'Co-Founder', img: '/images/team3.jpg' },
-];
+import { LUMENIFY_DATA } from '../data/lumenifyData';
 
 export default function Team() {
   const handleImageError = (e) => {
@@ -62,11 +57,11 @@ export default function Team() {
           </div>
 
           <div className="services-grid">
-            {TEAM.map((m) => (
+            {LUMENIFY_DATA.team.map((m) => (
               <div className="service-card" key={m.name}>
                 <div className="image-container" style={{ marginBottom: 16 }}>
                   <img
-                    src={m.img}
+                    src={m.image}
                     alt=""
                     className="profile-image"
                     style={{ objectFit: 'cover' }}
