@@ -25,6 +25,14 @@
       "dest": "/manifest.json"
     },
     {
+      "src": "/(khalid|farrel|suli)\\.png",
+      "dest": "/$1.png"
+    },
+    {
+      "src": "/logo-square\\.jpg",
+      "dest": "/logo-square.jpg"
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
     }
