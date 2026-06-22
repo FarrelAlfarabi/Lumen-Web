@@ -91,7 +91,7 @@ const Footer = () => {
               <input
                 type="text"
                 name="business"
-                placeholder="Business URL / Instagram"
+                placeholder="Business URL / Instagram / Email"
                 value={formData.business}
                 onChange={handleChange}
                 required
