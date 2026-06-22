@@ -1,9 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { LUMENIFY_DATA } from '../data/lumenifyData';
 import { MapPin, Mail, Instagram, ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   const { name, email, instagram, office } = LUMENIFY_DATA.company;
+  const [formData, setFormData] = useState({
+    name: '',
+    business: '',
+    budget: ''
+  });
+  const [status, setStatus] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setStatus('');
+
+    try {
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', formData.name);
+      formDataToSend.append('business', formData.business);
+      formDataToSend.append('budget', formData.budget);
+
+      const response = await fetch('https://formspree.io/f/mgojevko', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setStatus('success');
+        setFormData({ name: '', business: '', budget: '' });
+      } else {
+        setStatus('error');
+      }
+    } catch (error) {
+      setStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <footer id="contact" className="py-32 px-6 bg-[#0A0A0A] border-t border-[#222222]">
@@ -22,17 +68,53 @@ const Footer = () => {
 
           {/* Lead Capture Form */}
           <div className="bg-[#161616] border border-[#222222] p-8">
-            <form className="space-y-6">
-              <input type="text" placeholder="Your Name" className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-white focus:outline-none focus:border-[#C1FF00] transition-colors" />
-              <input type="text" placeholder="Business URL / Instagram" className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-white focus:outline-none focus:border-[#C1FF00] transition-colors" />
-              <select className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-[#888888] focus:outline-none focus:border-[#C1FF00] transition-colors appearance-none">
-                <option>Monthly Ad Budget</option>
-                <option>Under Rp 10M</option>
-                <option>Rp 10M - 50M</option>
-                <option>Over Rp 50M</option>
+            {status === 'success' && (
+              <div className="bg-green-900 text-white p-4 mb-6 rounded">
+                Thank you! We'll be in touch soon.
+              </div>
+            )}
+            {status === 'error' && (
+              <div className="bg-red-900 text-white p-4 mb-6 rounded">
+                Something went wrong. Please try again.
+              </div>
+            )}
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-white focus:outline-none focus:border-[#C1FF00] transition-colors"
+              />
+              <input
+                type="text"
+                name="business"
+                placeholder="Business URL / Instagram"
+                value={formData.business}
+                onChange={handleChange}
+                required
+                className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-white focus:outline-none focus:border-[#C1FF00] transition-colors"
+              />
+              <select
+                name="budget"
+                value={formData.budget}
+                onChange={handleChange}
+                required
+                className="w-full bg-[#0A0A0A] border border-[#222222] p-4 text-[#888888] focus:outline-none focus:border-[#C1FF00] transition-colors appearance-none"
+              >
+                <option value="">Monthly Ad Budget</option>
+                <option value="Under Rp 10M">Under Rp 10M</option>
+                <option value="Rp 10M - 50M">Rp 10M - 50M</option>
+                <option value="Over Rp 50M">Over Rp 50M</option>
               </select>
-              <button className="w-full bg-[#C1FF00] text-[#0A0A0A] font-bold p-4 hover:bg-white transition-colors flex justify-center items-center gap-2">
-                Request Consultation <ArrowUpRight className="w-4 h-4" />
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full bg-[#C1FF00] text-[#0A0A0A] font-bold p-4 hover:bg-white transition-colors flex justify-center items-center gap-2 disabled:opacity-50"
+              >
+                {isSubmitting ? 'Sending...' : 'Request Consultation'} <ArrowUpRight className="w-4 h-4" />
               </button>
             </form>
           </div>
